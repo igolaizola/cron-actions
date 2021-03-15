@@ -1,0 +1,16 @@
+name: cron-test
+
+on:
+  schedule:
+    - cron: "5 14 * * *"
+
+jobs:
+  cron-test:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: curl-get
+        run: |
+          curl -X GET "https://maker.ifttt.com/trigger/log/with/key/$IFTTT_KEY?value1=cron_test" > /dev/null 2>&1
+        env:
+          IFTTT_KEY: ${{ secrets.IFTTT_KEY }}
