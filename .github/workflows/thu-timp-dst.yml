@@ -1,0 +1,22 @@
+name: thu-timp-dst
+
+on:
+  schedule:
+    - cron: "50 21 * * 0"
+
+jobs:
+  thu-timp-dst:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: thu-timp
+        run: |
+          ./scripts/dst-on.sh || exit 0
+          ./scripts/thu-timp.sh
+        env:
+          EMAIL1: ${{ secrets.EMAIL1 }}
+          PASS1: ${{ secrets.PASS1 }}
+          CENTER1: ${{ secrets.CENTER1 }}
+          ACTIVITY1: ${{ secrets.ACTIVITY1 }}
+          IFTTT_KEY: ${{ secrets.IFTTT_KEY }}
