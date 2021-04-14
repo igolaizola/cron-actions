@@ -1,25 +1,31 @@
-name: thu-timp-dst
+name: sun-timp-dst
 
 on:
   schedule:
-    - cron: "50 21 * * 0"
+    - cron: "50 21 * * 3"
 
 jobs:
-  thu-timp-dst:
+  sun-timp-dst:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: thu-timp
+      - name: sun-timp
         run: |
           chmod +x ./scripts/*
           ./scripts/dst-on.sh || exit 0
-          ./scripts/thu-timp.sh
+          ./scripts/sun-timp.sh
         env:
           EMAIL1: ${{ secrets.EMAIL1 }}
           PASS1: ${{ secrets.PASS1 }}
+          EMAIL2: ${{ secrets.EMAIL2 }}
+          PASS2: ${{ secrets.PASS2 }}
+          EMAIL3: ${{ secrets.EMAIL3 }}
+          PASS3: ${{ secrets.PASS3 }}
           EMAIL4: ${{ secrets.EMAIL4 }}
           PASS4: ${{ secrets.PASS4 }}
+          EMAIL5: ${{ secrets.EMAIL5 }}
+          PASS5: ${{ secrets.PASS5 }}
           CENTER1: ${{ secrets.CENTER1 }}
-          ACTIVITY2: ${{ secrets.ACTIVITY2 }}
+          ACTIVITY1: ${{ secrets.ACTIVITY1 }}
           IFTTT_KEY: ${{ secrets.IFTTT_KEY }}
