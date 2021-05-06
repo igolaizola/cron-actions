@@ -1,0 +1,25 @@
+name: tue-timp
+
+on:
+  schedule:
+    - cron: "50 22 * * 5"
+
+jobs:
+  tue-timp:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: tue-timp
+        run: |
+          chmod +x ./scripts/*
+          ./scripts/dst-off.sh || exit 0
+          ./scripts/tue-timp.sh
+        env:
+          EMAIL1: ${{ secrets.EMAIL1 }}
+          PASS1: ${{ secrets.PASS1 }}
+          EMAIL6: ${{ secrets.EMAIL6 }}
+          PASS6: ${{ secrets.PASS6 }}
+          CENTER1: ${{ secrets.CENTER1 }}
+          ACTIVITY1: ${{ secrets.ACTIVITY2 }}
+          IFTTT_KEY: ${{ secrets.IFTTT_KEY }}
